@@ -13,5 +13,10 @@ It can be accessed through this URL: https://ibra-weather-application.herokuapp.
   - The Help tab insructs the user on how to use the app to retreive a live weather forecast for a desried location. 
 
 ## How it Works
-  - Used the Weather Stack and Geocode APIs to create a weather app that fetches live weather feed for the user upon an inputted location.
-  - The backend of this application uses Node to make HTTP Requests to the two APIs in use.
+  - This application was written mainly in JavaScript with the backend using Node to make HTTP Requests to the two APIs in use.
+  - The two APIs in use are WeatherStack and MapBox:
+    - The WeatherStack API takes a longitude and latitude as input and returns a JSON object containing different attributes of the weather like Temperature, Humidity, Precipitation, Wind Speed, etc.
+    - The MapBox API has a Geocode endpoint which takes in a string with a location name and return a JSON object with two attributes - the Longitude and Latitude.
+  - I figured the average user has no idea what the longitude and latitude of the location in which they want the weather for is, for this reason, their input of the location name is used to hit the MapBox API. This GET request to the API will then respond with a longitude and latitude (if it exists), and the response is fed into another GET request to the WeatherStack API to retreive the current weather of that location. 
+  - Certain attributes of the weather from the response of the WeatherStack API are extracted and placed into a template string, the template string is then printed to the user's screen.
+  - Error handling is in place to account for invalid locations, and times when either of the APIs in use are down. 
